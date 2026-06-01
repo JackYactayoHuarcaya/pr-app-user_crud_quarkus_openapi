@@ -5,15 +5,6 @@ info:
   version: 1.0.0
 paths:
   /users:
-    get:
-      operationId: find
-      responses:
-        200:
-          description: find users
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserResponse"
     post:
       operationId: create
       requestBody:
@@ -28,7 +19,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserResponse"
-  /users/${id}:
+  /users/{id}:
+    get:
+      operationId: find
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: find users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
     put:
       operationId: update
       parameters:
