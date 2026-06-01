@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: api
+  description: mi app
+  version: 1.0.0
+paths:
+  /users:
+    get:
+      operationId: find
+      responses:
+        200:
+          description: find users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    post:
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+      responses:
+        200:
+          description: find user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+  /users/${id}:
+    put:
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+      responses:
+        "200":
+          description: update user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+    delete:
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: delete user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+
+components:
+  schemas:
+    UserResponse:
+      properties:
+        user_id:
+          type: string
+        user_name:
+          type: string
+        user_age:
+          type: integer
+        user_code:
+          type: integer
+    UserRequest:
+      properties:
+        user_name:
+          type: string
+        user_age:
+          type: integer
+        user_code:
+          type: integer
